@@ -25,6 +25,21 @@ public class SelectCar : MonoBehaviour
         SceneManager.LoadScene(_sceneToLoad);
         _selctedCar.gameObject.AddComponent<PlayerTest>();
         _selctedCar.gameObject.AddComponent<Rigidbody>();
+        CarData carData = GameManager.instance.CarsToInstantiate.GetData(_selctedCar.name);
+        SetCarData(carData);
+        _selctedCar.transform.localEulerAngles = Vector3.zero;
         _selctedCar.tag = "Player";
+    }
+
+    private void SetCarData(CarData data)
+    {
+        if (_selctedCar == null) { return; }
+
+        _selctedCar.GetComponent<Rigidbody>().mass = data.weight;
+        Player.Controller.PlayerController controller = _selctedCar.GetComponent<Player.Controller.PlayerController>();
+        controller.Acelerate = data.aceleration;
+        controller.Deacelerate = data.deaceleration;
+        controller.MaxSpeed = data.topSpeed;
+        controller.CarRotSpeed = data.carRotSpeed;
     }
 }

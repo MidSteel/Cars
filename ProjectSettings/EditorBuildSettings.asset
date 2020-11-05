@@ -6,9 +6,12 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Scenes/CarSelectionScene.unity
+    path: Assets/Game/Scenes/CarSelectionScene.unity
     guid: 4792724f8a9735c4a8edc7526767a2b2
-  - enabled: 1
-    path: Assets/Scenes/LevelScene.unity
+  - enabled: 0
+    path: Assets/Game/Scenes/LevelScene.unity
     guid: 5a41b8d3fdf3f0645bebe70a1fb5c617
+  - enabled: 1
+    path: Assets/Game/Scenes/LevelScene.unity
+    guid: 9a1c8579f965e3d4d83e0ef67668caea
   m_configObjects: {}
