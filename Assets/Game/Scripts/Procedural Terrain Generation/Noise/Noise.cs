@@ -20,12 +20,14 @@ namespace ProceduralTerrainGeneratio.Noise
         private static Vector2[] _octaveOffsets;
         private static float _offsetX;
         private static float _offsetY;
+        private static float _maxPossibleHeight;
 
         /// <returns>
         /// returns randomly Generated noiseMap.
         /// </returns>
         public static float[,] GenerateNoiseMap(int mapWidth, int mapHeight, int seed, float scale, int octaves, float persistance, float lacunarity, Vector2 offset)
         {
+            _maxPossibleHeight = 0f;
             _noiseMap = new float[mapWidth, mapHeight];
             _prng = new System.Random(seed);
             _octaveOffsets = new Vector2[octaves];
@@ -35,7 +37,9 @@ namespace ProceduralTerrainGeneratio.Noise
                 _offsetX = _prng.Next(-100000, 100000) + offset.x;
                 _offsetY = _prng.Next(-100000, 100000) + offset.y;
                 _octaveOffsets[i].x = _offsetX;
-                _octaveOffsets[i].y = _offsetY;
+                _octaveOffsets[i].y = _offsetY; 
+                _maxPossibleHeight += _amplitude;
+                _amplitude *= persistance;
             }
 
             scale = (scale <= 0) ? 0.0001f : scale;
@@ -52,8 +56,8 @@ namespace ProceduralTerrainGeneratio.Noise
 
                     for (int i = 0; i < octaves; i++)
                     {
-                        _sampleX = (x - (mapWidth / 2f)) / scale * _frequncy + _octaveOffsets[i].x;
-                        _sampleY = (y - (mapWidth / 2f)) / scale * _frequncy + _octaveOffsets[i].y;
+                        _sampleX = (x - (mapWidth / 2f) * _frequncy + _octaveOffsets[i].x) / scale;
+                        _sampleY = (y - (mapWidth / 2f) * _frequncy + _octaveOffsets[i].y) / scale;
 
                         _perlinValue = Mathf.PerlinNoise(_sampleX, _sampleY) * 2f - 1f;
                         _noiseHeight += _perlinValue * _amplitude;
@@ -72,7 +76,8 @@ namespace ProceduralTerrainGeneratio.Noise
             {
                 for (int x = 0;  x < mapWidth; x++)
                 {
-                    _noiseMap[x, y] = Mathf.InverseLerp(_minNosieHeight, _maxNoiseHeight, _noiseMap[x, y]);
+                    //_noiseMap[x, y] = Mathf.InverseLerp(_minNosieHeight, _maxNoiseHeight, _noiseMap[x, y]);
+                    _noiseMap[x, y] = (_noiseMap[x, y] + 1) / (2f * _maxPossibleHeight / 1.5f);
                 }
             }
 
