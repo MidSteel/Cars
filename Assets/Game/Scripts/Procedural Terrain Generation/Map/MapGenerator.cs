@@ -20,12 +20,14 @@ namespace ProceduralTerrainGeneratio.Map
         [SerializeField] private TerrainType[] _regions = null;
         [SerializeField] private AnimationCurve _meshHeightCurve = null;
 
+        public Vector2 Offset { get { return _offset; } set { _offset = value; } }
+
         //Cache
         private float[,] _noiseMap;
         private Color[] _colorMap;
 
         [ContextMenu("Generate Map")]
-        private void GenerateMap()
+        public void GenerateMap()
         {
             _noiseMap = Noise.Noise.GenerateNoiseMap(mapChunkSize, mapChunkSize, _seed, _noiseScale, _octaves, _persistance, _lacunarity, _offset);
             _colorMap = new Color[mapChunkSize * mapChunkSize];

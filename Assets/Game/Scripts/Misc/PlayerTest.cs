@@ -49,10 +49,10 @@ public class PlayerTest : MonoBehaviour
 
     private void Update()
     {
+        if (!_forwardButton || !_backwardButton || !_leftButton || !_rightButton) { return; }
+
         if (Input.GetKey(KeyCode.A)) { _leftButton.ButtonDown(); }
         else if (Input.GetKey(KeyCode.D)) { _rightButton.ButtonDown(); }
-
-        Debug.Log(_rightButton.IsClicked);
 
         if (Input.GetKeyUp(KeyCode.A)) { _leftButton.ButtonUp(); }
         else if (Input.GetKeyUp(KeyCode.D)) { _rightButton.ButtonUp(); }

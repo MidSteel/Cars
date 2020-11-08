@@ -22,7 +22,7 @@ public class SelectCar : MonoBehaviour
     {
         _selctedCar = ColorManager.instance.CurrentColorRegister;
         DontDestroyOnLoad(_selctedCar);
-        SceneManager.LoadScene(_sceneToLoad);
+        GameObject.FindObjectOfType<PreloadData>().LoadScene(_sceneToLoad);
         _selctedCar.gameObject.AddComponent<PlayerTest>();
         _selctedCar.gameObject.AddComponent<Rigidbody>();
         CarData carData = GameManager.instance.CarsToInstantiate.GetData(_selctedCar.name);

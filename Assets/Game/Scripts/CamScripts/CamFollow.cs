@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Rendering.PostProcessing;
 
 public class CamFollow : MonoBehaviour
 {
@@ -9,7 +10,9 @@ public class CamFollow : MonoBehaviour
     [SerializeField] private float _camFollowSpeed = 0.2f;
     [SerializeField] private float _camRotSpeed = 1f;
 
+    private PostProcessVolume _postProcessVolume = null;
     private GameObject _target = null;
+    private DepthOfField _depthOfField = null;
 
     public Vector3 Offset { get { return _offset; } set { _offset = value; } }
 
@@ -18,9 +21,17 @@ public class CamFollow : MonoBehaviour
 
     private void Start()
     {
+        _postProcessVolume = this.GetComponent<PostProcessVolume>();
+        _depthOfField = _postProcessVolume.profile.GetSetting<DepthOfField>();
         _target = GameObject.FindGameObjectWithTag("Player");
 
         if (_target != null) { this.transform.position = _target.transform.position + transform.TransformDirection(_offset); }
+        OnValueChange();
+    }
+
+    public void OnValueChange()
+    {
+        _depthOfField.focusDistance.value = Vector3.Distance(this.transform.position, _target.transform.position) / 2f;
     }
 
     private void LateUpdate()
