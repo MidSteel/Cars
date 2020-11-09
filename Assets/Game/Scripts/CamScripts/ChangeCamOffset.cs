@@ -18,9 +18,9 @@ public class ChangeCamOffset : MonoBehaviour
     {
         _camFollow = GameObject.FindObjectOfType<CamFollow>();
         SetSliders();
-        _xSlider.onValueChanged.AddListener(delegate { _camFollow.OnValueChange(); });
-        _ySlider.onValueChanged.AddListener(delegate { _camFollow.OnValueChange(); });
-        _zSlider.onValueChanged.AddListener(delegate { _camFollow.OnValueChange(); });
+        //_xSlider.onValueChanged.AddListener(delegate { _camFollow.OnValueChange(); });
+        //_ySlider.onValueChanged.AddListener(delegate { _camFollow.OnValueChange(); });
+        //_zSlider.onValueChanged.AddListener(delegate { _camFollow.OnValueChange(); });
     }
 
     public void Update()

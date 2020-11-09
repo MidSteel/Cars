@@ -1,5 +1,5 @@
 sceneSetups:
-- path: Assets/Game/Scenes/CarSelectionScene.unity
+- path: Assets/Game/Scenes/LevelScene.unity
   isLoaded: 1
   isActive: 1
   isSubScene: 0

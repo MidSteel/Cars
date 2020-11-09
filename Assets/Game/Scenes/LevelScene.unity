@@ -1152,7 +1152,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 0}
   m_PlayOnAwake: 1
-  m_Volume: 0.092
+  m_Volume: 0.079
   m_Pitch: 1
   Loop: 0
   Mute: 0
@@ -2443,6 +2443,7 @@ MonoBehaviour:
   _mapGeneratorPrefab: {fileID: 8574257066905792394, guid: dd0cf307b28465a44be4b1346d40677e, type: 3}
   _mapsParentTransform: {fileID: 1122846177}
   _playerStartPos: {fileID: 1763881813}
+  _viewDistance: 241
 --- !u!1 &1426813180
 GameObject:
   m_ObjectHideFlags: 0

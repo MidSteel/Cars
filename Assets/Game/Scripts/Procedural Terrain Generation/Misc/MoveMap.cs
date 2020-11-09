@@ -11,9 +11,13 @@ public class MoveMap : MonoBehaviour
     [SerializeField] private GameObject _mapGeneratorPrefab = null;
     [SerializeField] private Transform _mapsParentTransform = null;
     [SerializeField] private Transform _playerStartPos = null;
+    [SerializeField] private float _viewDistance = 100f;
 
-    private Dictionary<Vector2, MapGenerator> _maps= new Dictionary<Vector2, MapGenerator>();
+    private PlayerTest _player = null;
+    private Dictionary<Vector2, MapGenerator> _maps = new Dictionary<Vector2, MapGenerator>();
     private int _chunkSize = 0;
+    private List<TerrainPos> _terrains = new List<TerrainPos>();
+    private List<TerrainPos> _temp = new List<TerrainPos>();
 
     private void Awake()
     {
@@ -23,20 +27,21 @@ public class MoveMap : MonoBehaviour
 
     private void Start()
     {
-        GameObject player = GameObject.FindWithTag("Player");
+        _player = GameObject.FindWithTag("Player").GetComponent<PlayerTest>();
 
-        if (player != null)
+        if (_player != null)
         {
-            player.transform.position = _playerStartPos.position;
+            _player.transform.position = _playerStartPos.position;
         }
     }
 
     private void InstantiateMaps()
     {
         GameObject mapToInstantiate;
-        GameObject mapGeneratorToInstantiate; 
+        GameObject mapGeneratorToInstantiate;
         Vector3 posVector;
         Vector2 mapOffsetVector;
+        TerrainPos terrainPos;
 
         posVector.y = 0f;
 
@@ -53,8 +58,44 @@ public class MoveMap : MonoBehaviour
                 mapOffsetVector.y = _chunkSize * y;
                 mapGeneratorToInstantiate.GetComponent<MapGenerator>().Offset = mapOffsetVector;
                 SetMapDisplay(mapToInstantiate, mapGeneratorToInstantiate);
+                mapToInstantiate.AddComponent<TerrainObj>();
+                terrainPos.coordinates.x = posVector.x;
+                terrainPos.coordinates.y = posVector.z;
+                terrainPos.terrain = mapToInstantiate;
+                _terrains.Add(terrainPos);
             }
         }
+    }
+
+    private void LateUpdate()
+    {
+        UpdateMap();
+    }
+
+    //Cache
+    float _distance = 0f;
+    float _dotProduct = 0f;
+    public void UpdateMap()
+    {
+        if (_player == null) { return; }
+
+        for (int i = 0; i < _terrains.Count; i++)
+        {
+            _distance = Vector3.Distance(_player.transform.position, _terrains[i].terrain.transform.position);
+            _dotProduct = Vector3.Dot(_player.transform.position, _terrains[i].terrain.transform.position);
+
+
+            if ((_distance <= _viewDistance && _dotProduct >= 0f) || _terrains[i].terrain == _player.CurrentTerrain.gameObject)
+            {
+                _terrains[i].terrain.SetActive(true);
+            }
+            else { _terrains[i].terrain.SetActive(false); }
+        }
+    }
+
+    private void MoveTerrainChunks()
+    {
+
     }
 
     private void PositionateMap(Vector3 pos, GameObject mapObj)
@@ -69,5 +110,12 @@ public class MoveMap : MonoBehaviour
         display.MeshRendere = mapObj.GetComponent<MeshRenderer>();
         display.MeshFilter = mapObj.GetComponent<MeshFilter>();
         mapGeneratorObj.GetComponent<MapGenerator>().GenerateMap();
+    }
+
+    [System.Serializable]
+    public struct TerrainPos
+    {
+        public Vector2 coordinates;
+        public GameObject terrain;
     }
 }

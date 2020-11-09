@@ -26,7 +26,7 @@ public class CamFollow : MonoBehaviour
         _target = GameObject.FindGameObjectWithTag("Player");
 
         if (_target != null) { this.transform.position = _target.transform.position + transform.TransformDirection(_offset); }
-        OnValueChange();
+        //OnValueChange();
     }
 
     public void OnValueChange()
@@ -50,6 +50,8 @@ public class CamFollow : MonoBehaviour
             this.transform.localRotation = _targetPointer.transform.localRotation;
             this.transform.localPosition = Vector3.Lerp(this.transform.position, _targetPointer.transform.position + transform.TransformDirection(_offset), _camFollowSpeed * Time.deltaTime);
             this.transform.LookAt(Vector3.Lerp(this.transform.position, _target.transform.position, _camRotSpeed));
+
+            OnValueChange();
         }
     }
 }

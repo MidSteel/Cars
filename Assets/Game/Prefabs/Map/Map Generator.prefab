@@ -60,7 +60,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _mapDisplay: {fileID: 8574257066905792436}
-  _levelOfDetail: 0
+  _levelOfDetail: 4
   _octaves: 3
   _persistance: 0.9
   _lacunarity: 2

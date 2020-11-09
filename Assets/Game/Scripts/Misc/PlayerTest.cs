@@ -16,7 +16,9 @@ public class PlayerTest : MonoBehaviour
     private bool _deAcelerate = false;
     private PlayerController _playerController = null;
     private MoveDirection _previousDirection = MoveDirection.Idle;
+    private TerrainObj _currentTerrain = null;
     
+    public TerrainObj CurrentTerrain { get{ return _currentTerrain; } }
     public ButtonClick RightButton { get { return _rightButton; } }
     public ButtonClick LeftButton { get { return _leftButton; } }
 
@@ -64,6 +66,11 @@ public class PlayerTest : MonoBehaviour
         else if (_leftButton.IsClicked) { MoveLeft(); }
 
         if (ShouldDeacelerate()) { Deacelerate(_playerController.Deacelerate); }
+    }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        collision.gameObject.TryGetComponent<TerrainObj>(out _currentTerrain);
     }
 
     private void Deacelerate(float deacelerationspeed)

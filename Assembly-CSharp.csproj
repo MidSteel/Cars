@@ -68,27 +68,28 @@
     <Compile Include="Assets\Game\Scripts\Procedural Terrain Generation\Noise\Noise.cs" />
     <Compile Include="Assets\Game\Scripts\ColorChanger\ColorManager.cs" />
     <Compile Include="Assets\Game\Scripts\CamScripts\ChangeCamOffset.cs" />
+    <Compile Include="Assets\Game\Scripts\Procedural Terrain Generation\Misc\MoveMap.cs" />
     <Compile Include="Assets\Game\Scripts\Procedural Terrain Generation\Map\MapDisplay.cs" />
     <Compile Include="Assets\Game\Scripts\ColorChanger\ColorRegistersManager.cs" />
     <Compile Include="Assets\Game\Scripts\Audio\AudioManager.cs" />
     <Compile Include="Assets\Game\Scripts\Procedural Terrain Generation\Map\Mesh\MeshGenerator.cs" />
     <Compile Include="Assets\Game\Scripts\ColorChanger\ButtonClick.cs" />
     <Compile Include="Assets\Game\Scripts\Misc\Cars.cs" />
+    <Compile Include="Assets\Game\Scripts\Utility\ScriptableLoadData.cs" />
     <Compile Include="Assets\Game\Scripts\Audio\DecodeAudio.cs" />
     <Compile Include="Assets\HolyShift\Scripts\CheckForStandardAssets.cs" />
     <Compile Include="Assets\Game\Scripts\Misc\PlayerController.cs" />
     <Compile Include="Assets\Game\Scripts\Car Selection\CarSelection.cs" />
     <Compile Include="Assets\Game\Scripts\CamScripts\CamFollow.cs" />
     <Compile Include="Assets\Game\Scripts\Misc\PlayerTest.cs" />
+    <Compile Include="Assets\Game\Scripts\Utility\PreloadData.cs" />
     <Compile Include="Assets\Game\Scripts\Audio\AudioFetcher.cs" />
     <Compile Include="Assets\Game\Scripts\Procedural Terrain Generation\Map\MapGenerator.cs" />
     <Compile Include="Assets\Game\Scripts\Car Selection\CarAttributes.cs" />
     <Compile Include="Assets\Game\Scripts\ColorChanger\ColorRegisterHolder.cs" />
     <Compile Include="Assets\Game\Scripts\Car Selection\SelectCar.cs" />
     <Compile Include="Assets\Game\Scripts\Audio\AudioData.cs" />
-    <Compile Include="Assets\Game\Scripts\Procedural Terrain Generation\Misc\MoveMap.cs" />
-    <Compile Include="Assets\Game\Scripts\Utility\PreloadData.cs" />
-    <Compile Include="Assets\Game\Scripts\Utility\ScriptableLoadData.cs" />
+    <Compile Include="Assets\Game\Scripts\Procedural Terrain Generation\Misc\TerrainObj.cs" />
   </ItemGroup>
   <ItemGroup>
      <None Include="Assets\HolyShift\Shaders\FXWaterLowpoly.shader" />
